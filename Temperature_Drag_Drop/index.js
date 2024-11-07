@@ -10,6 +10,7 @@ const lib = new ImageLib('my_canvas');
 
 let canvas = lib.canvas_handler;
 
+// Array kotak air
 let points = [
     { x: 500, y: 650 }, // points[0]
     { x: 500, y: 850 }, // points[1]
@@ -17,6 +18,7 @@ let points = [
     { x: 700, y: 650 } // points[3]
 ];
 
+// Array area panas
 let pointsMerah = [
     { x: 150, y: 250 },
     { x: 150, y: 600 },
@@ -24,13 +26,13 @@ let pointsMerah = [
     { x: 500, y: 250 }
 ];
 
+// Array area dingin
 let pointsBiru = [
     { x: 700, y: 250 },
     { x: 700, y: 600 },
     { x: 1050, y: 600 },
     { x: 1050, y: 250 }
 ];
-
 
 let drag = false;
 let offsetX, offsetY;
@@ -40,11 +42,13 @@ let filly = points[0].y;
 
 let color = { r: 13, g: 69, b: 252 };
 
+// Fungsi menggambar outline kotak air
 function gambarKotak() {
     lib.create_polygon(points, color);
     lib.draw();
 }
 
+// Fungsi mengisi kotak air dengan warna
 function kotakAir() {
     gambarKotak();
     lib.floodFillStack(canvas, fillx + 1, filly + 1, { r: 0, g: 0, b: 0 }, color);
@@ -53,6 +57,7 @@ function kotakAir() {
 
 kotakAir();
 
+// Fungsi membuat area panas dan dingin
 function area() {
     lib.create_polygon(pointsMerah, { r: 252, g: 86, b: 86 });
     lib.create_polygon(pointsBiru, { r: 179, g: 246, b: 255 });
@@ -61,22 +66,22 @@ function area() {
 
 area();
 
-// Bantuan Chat-GPT
+// Fungsi Cek klik didalam kotak
 function didalamKotak(x, y) {
     return x > points[0].x && x < points[2].x && y > points[0].y && y < points[2].y;
 }
+// Fungsi cek kalau kotak air didalam kotak merah
 function didalamKotakMerah() {
     return points[0].x >= pointsMerah[0].x && points[2].x <= pointsMerah[2].x &&
         points[0].y >= pointsMerah[0].y && points[1].y <= pointsMerah[1].y;
 }
+// Fungsi cek kalau kotak air didalam kotak biru
 function didalamKotakBiru() {
     return points[0].x >= pointsBiru[0].x && points[2].x <= pointsBiru[2].x &&
         points[0].y >= pointsBiru[0].y && points[1].y <= pointsBiru[1].y;
 }
 
-
-
-
+// Event listener klik
 canvas.addEventListener('mousedown', function (ev) {
     var rect = canvas.getBoundingClientRect();
     var x = ev.clientX - rect.left;
@@ -89,6 +94,7 @@ canvas.addEventListener('mousedown', function (ev) {
     }
 });
 
+// Event listener klik dan drag
 canvas.addEventListener('mousemove', function (ev) {
     if (drag) {
         var rect = canvas.getBoundingClientRect();
@@ -124,14 +130,7 @@ canvas.addEventListener('mousemove', function (ev) {
     };
 });
 
-
+// Event listener lepas klik
 canvas.addEventListener('mouseup', function () {
     drag = false;
-});
-
-canvas.addEventListener('mousedown', function (ev) {
-    var rect = canvas.getBoundingClientRect();
-    var x = ev.clientX - rect.left;
-    var y = ev.clientY - rect.top;
-    console.log(x, y)
 });
