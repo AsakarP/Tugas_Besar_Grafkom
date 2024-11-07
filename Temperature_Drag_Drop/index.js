@@ -6,34 +6,76 @@
 
 import { ImageLib } from "./lib.js";
 
-const lib = new ImageLib('my_canvas')
+const lib = new ImageLib('my_canvas');
 
 let canvas = lib.canvas_handler;
 
 let points = [
-    {x:350, y:350},
-    {x:350, y:600},
-    {x:600, y:600},
-    {x:600, y:350}
-]
+    { x: 500, y: 650 }, // points[0]
+    { x: 500, y: 850 }, // points[1]
+    { x: 700, y: 850 }, // points[2]
+    { x: 700, y: 650 } // points[3]
+];
+
+let pointsMerah = [
+    { x: 150, y: 250 },
+    { x: 150, y: 600 },
+    { x: 500, y: 600 }, // Kanan Bawah
+    { x: 500, y: 250 }
+];
+
+let pointsBiru = [
+    { x: 700, y: 250 },
+    { x: 700, y: 600 },
+    { x: 1050, y: 600 },
+    { x: 1050, y: 250 }
+];
+
 
 let drag = false;
 let offsetX, offsetY;
 
-let fillx = points[0].x
-let filly = points[0].y
+let fillx = points[0].x;
+let filly = points[0].y;
 
-function kotakMerah() {
-    lib.create_polygon(points, {r:255,g:0,b:0});
-    lib.floodFillStack(canvas, fillx+1, filly+1, {r:0,g:0,b:0}, {r:255,g:0,b:0})
+let color = { r: 13, g: 69, b: 252 };
+
+function gambarKotak() {
+    lib.create_polygon(points, color);
     lib.draw();
 }
 
-kotakMerah();
+function kotakAir() {
+    gambarKotak();
+    lib.floodFillStack(canvas, fillx + 1, filly + 1, { r: 0, g: 0, b: 0 }, color);
+    lib.draw();
+}
 
+kotakAir();
+
+function area() {
+    lib.create_polygon(pointsMerah, { r: 252, g: 86, b: 86 });
+    lib.create_polygon(pointsBiru, { r: 179, g: 246, b: 255 });
+    lib.draw();
+}
+
+area();
+
+// Bantuan Chat-GPT
 function didalamKotak(x, y) {
     return x > points[0].x && x < points[2].x && y > points[0].y && y < points[2].y;
 }
+function didalamKotakMerah() {
+    return points[0].x >= pointsMerah[0].x && points[2].x <= pointsMerah[2].x &&
+        points[0].y >= pointsMerah[0].y && points[1].y <= pointsMerah[1].y;
+}
+function didalamKotakBiru() {
+    return points[0].x >= pointsBiru[0].x && points[2].x <= pointsBiru[2].x &&
+        points[0].y >= pointsBiru[0].y && points[1].y <= pointsBiru[1].y;
+}
+
+
+
 
 canvas.addEventListener('mousedown', function (ev) {
     var rect = canvas.getBoundingClientRect();
@@ -57,24 +99,39 @@ canvas.addEventListener('mousemove', function (ev) {
         const dy = y - offsetY;
 
         points = [
-            {x:dx, y: dy},
-            {x:dx, y: dy+250},
-            {x:dx+250, y: dy+250},
-            {x:dx+250, y: dy},
+            { x: dx, y: dy },
+            { x: dx, y: dy + 200 },
+            { x: dx + 200, y: dy + 200 },
+            { x: dx + 200, y: dy },
         ];
 
         fillx = points[0].x
         filly = points[0].y
 
-        lib.clear();
-        kotakMerah();
-    }
+        if (didalamKotakMerah()) {
+            color = { r: 252, g: 86, b: 86 };
+        } else if (didalamKotakBiru()) {
+            color = { r: 179, g: 246, b: 255 };
+        } else {
+            color = { r: 13, g: 69, b: 252 };
+        }
+
+        requestAnimationFrame(() => {
+            lib.clear();
+            kotakAir();
+            area();
+        });
+    };
 });
+
 
 canvas.addEventListener('mouseup', function () {
     drag = false;
 });
 
-console.log(fillx, filly)
-
-
+canvas.addEventListener('mousedown', function (ev) {
+    var rect = canvas.getBoundingClientRect();
+    var x = ev.clientX - rect.left;
+    var y = ev.clientY - rect.top;
+    console.log(x, y)
+});
