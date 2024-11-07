@@ -1,0 +1,19 @@
+canvas{
+    border: 2px solid black;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+h3 {
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+}
+
+#textIni {
+    transition: font-size 0.9s ease;
+}
