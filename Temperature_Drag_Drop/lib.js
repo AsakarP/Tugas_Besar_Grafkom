@@ -13,7 +13,7 @@ export class ImageLib {
 
     // Membersih
     clear() {
-        this.canvas_handler.width = this.canvas_handler.width;
+        this.context.clearRect(0,0, this.canvas_handler.width, this.canvas_handler.height);
         this.image_data = this.context.getImageData(0, 0, this.canvas_handler.width, this.canvas_handler.height);
     }
 
