@@ -16,4 +16,18 @@ h3 {
 
 #textIni {
     transition: font-size 0.9s ease;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 20px;
+}
+
+input[type="text"],
+textarea {
+  border: 3px solid #000000;
+  border-radius: 10px;
+  background-color: #b2fcf8;
+}
+
+button {
+    border: 3px solid black;
+    border-radius: 10px;
 }
