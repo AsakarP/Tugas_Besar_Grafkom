@@ -100,6 +100,7 @@ for (let i=0; i<50; i++) {
     }
 }
 
+// Event listener mengubah warna menjadi hitam
 canvasHitam.addEventListener('click', function (ev) {
     var rect = canvasHitam.getBoundingClientRect();
     var x = ev.clientX - rect.left;
@@ -109,7 +110,7 @@ canvasHitam.addEventListener('click', function (ev) {
     warnaHitam = true
 });
 
-// Canvas Putih
+// Canvas Putih, mengubah warna menjadi putih
 canvasPutih.addEventListener('click', function (ev) {
     var rect = canvasHitam.getBoundingClientRect();
     var x = ev.clientX - rect.left;
