@@ -66,11 +66,16 @@ function area() {
 
 area();
 
-// Bantuan Chat-GPT
+
+
 // Fungsi Cek klik didalam kotak
 function didalamKotak(x, y) {
     return x > points[0].x && x < points[2].x && y > points[0].y && y < points[2].y;
 }
+// Bantuan Chat-GPT
+// "How do i make it so if the square is in
+// pointsMerah the square will become red and if 
+// it is in pointsBiru it will become blue."
 // Fungsi cek kalau kotak air didalam kotak merah
 function didalamKotakMerah() {
     return points[0].x >= pointsMerah[0].x && points[2].x <= pointsMerah[2].x &&
@@ -122,7 +127,10 @@ canvas.addEventListener('mousemove', function (ev) {
         } else {
             color = { r: 13, g: 69, b: 252 };
         }
-
+        // Bantuan Chat-GPT
+        // "i encounter a problem, and that is its
+        // pretty laggy when i dragged and move 
+        // it somewhere else."
         requestAnimationFrame(() => {
             lib.clear();
             kotakAir();
