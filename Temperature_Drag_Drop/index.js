@@ -12,17 +12,17 @@ let canvas = lib.canvas_handler;
 
 // Array kotak air
 let points = [
-    { x: 500, y: 650 }, // points[0]
-    { x: 500, y: 850 }, // points[1]
-    { x: 700, y: 850 }, // points[2]
-    { x: 700, y: 650 } // points[3]
+    { x: 500, y: 650 },
+    { x: 500, y: 850 },
+    { x: 700, y: 850 },
+    { x: 700, y: 650 }
 ];
 
 // Array area panas
 let pointsMerah = [
     { x: 150, y: 250 },
     { x: 150, y: 600 },
-    { x: 500, y: 600 }, // Kanan Bawah
+    { x: 500, y: 600 },
     { x: 500, y: 250 }
 ];
 
