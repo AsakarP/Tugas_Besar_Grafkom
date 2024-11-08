@@ -127,6 +127,7 @@ canvas.addEventListener('mousemove', function (ev) {
         } else {
             color = { r: 13, g: 69, b: 252 };
         }
+
         // Bantuan Chat-GPT
         // "i encounter a problem, and that is its
         // pretty laggy when i dragged and move 
