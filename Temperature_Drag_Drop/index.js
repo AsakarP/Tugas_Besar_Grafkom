@@ -66,7 +66,7 @@ function area() {
 
 area();
 
-// Babtuan Chat-GPT
+// Bantuan Chat-GPT
 // Fungsi Cek klik didalam kotak
 function didalamKotak(x, y) {
     return x > points[0].x && x < points[2].x && y > points[0].y && y < points[2].y;
